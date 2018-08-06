@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DAL;
+using MainDAL;
 
-namespace UI
+namespace UI1
 {
     public partial class MainForm : Form
     {
@@ -18,6 +16,12 @@ namespace UI
             InitializeComponent();
         }
 
+       
+        /// <summary>
+        /// 家庭成员单选框，选择事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FamilyOneCheck_CheckedChanged(object sender, EventArgs e)
         {
             if (FamilyOneCheck.Checked == true)
@@ -145,18 +149,22 @@ namespace UI
                 FamilyEightBwteenCom.Enabled = false;
             }
         }
-
+        /// <summary>
+        /// 点击按钮生成事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateBtn_Click(object sender, EventArgs e)
         {
             PresonModel preson = new PresonModel();
             List<FamilyPresonModel> list = new List<FamilyPresonModel>();
-           
+
             if (MainNameTxt.Text == "" || !Validation.IsChinese(MainNameTxt.Text))
             {
                 MessageBox.Show("申请人姓名错误");
                 return;
             }
-            if(MainIDcareTxt.Text==""|| !Validation.IsCareNumX(MainIDcareTxt.Text) || !Validation.IsCareID(MainIDcareTxt.Text))
+            if (MainIDcareTxt.Text == "" || !Validation.IsCareNumX(MainIDcareTxt.Text) || !Validation.IsCareID(MainIDcareTxt.Text))
             {
                 MessageBox.Show("申请人身份证错误");
                 return;
@@ -184,7 +192,7 @@ namespace UI
                     MessageBox.Show("家庭成员一姓名错误");
                     return;
                 }
-                if (FamilyOneIDcareTxt.Text == "" ||FamilyOneIDcareTxt.Text ==MainIDcareTxt.Text || !Validation.IsCareNumX(FamilyOneIDcareTxt.Text) || !Validation.IsCareID(FamilyOneIDcareTxt.Text))
+                if (FamilyOneIDcareTxt.Text == "" || FamilyOneIDcareTxt.Text == MainIDcareTxt.Text || !Validation.IsCareNumX(FamilyOneIDcareTxt.Text) || !Validation.IsCareID(FamilyOneIDcareTxt.Text))
                 {
                     MessageBox.Show("家庭成员一身份证错误");
                     return;
@@ -194,12 +202,14 @@ namespace UI
                     MessageBox.Show("家庭成员一关系未填");
                     return;
                 }
-                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyOneNameTxt.Text, IDcare = FamilyOneIDcareTxt.Text, ApplicantIDcare = MainIDcareTxt.Text, RelationshipBetween = FamilyOneBwteenCom.Text };
-                if (list.Where(p => p.IDcare == family.IDcare).ToList().Count != 0)
+                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyOneNameTxt.Text, IDcare = FamilyOneIDcareTxt.Text,  RelationshipBetween = FamilyOneBwteenCom.Text };
+                foreach (var item in list)
                 {
-                 
-                    MessageBox.Show("家庭成员一身份证号码重复");
-                    return;
+                    if (item.IDcare == family.IDcare)
+                    {
+                        MessageBox.Show("家庭成员一身份证号码重复");
+                        return;
+                    }
                 }
                 list.Add(family);
             }
@@ -221,11 +231,14 @@ namespace UI
                     MessageBox.Show("家庭成员二关系未填");
                     return;
                 }
-                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyTwoNameTxt.Text, IDcare = FamilyTwoIDcareTxt.Text, ApplicantIDcare = MainIDcareTxt.Text, RelationshipBetween = FamilyTwoBwteenCom.Text };
-                if (list.Where(p => p.IDcare == family.IDcare).ToList().Count != 0)
+                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyTwoNameTxt.Text, IDcare = FamilyTwoIDcareTxt.Text,  RelationshipBetween = FamilyTwoBwteenCom.Text };
+                foreach (var item in list)
                 {
-                    MessageBox.Show("家庭成员二身份证号码重复");
-                    return;
+                    if (item.IDcare == family.IDcare)
+                    {
+                        MessageBox.Show("家庭成员一身份证号码重复");
+                        return;
+                    }
                 }
                 list.Add(family);
             }
@@ -247,11 +260,14 @@ namespace UI
                     MessageBox.Show("家庭成员三关系未填");
                     return;
                 }
-                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyThreeNameTxt.Text, IDcare = FamilyThreeIDcareTxt.Text, ApplicantIDcare = MainIDcareTxt.Text, RelationshipBetween = FamilyThreeBwteenCom.Text };
-                if (list.Where(p => p.IDcare == family.IDcare).ToList().Count != 0)
+                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyThreeNameTxt.Text, IDcare = FamilyThreeIDcareTxt.Text,RelationshipBetween = FamilyThreeBwteenCom.Text };
+                foreach (var item in list)
                 {
-                    MessageBox.Show("家庭成员三身份证号码重复");
-                    return;
+                    if (item.IDcare == family.IDcare)
+                    {
+                        MessageBox.Show("家庭成员一身份证号码重复");
+                        return;
+                    }
                 }
                 list.Add(family);
             }
@@ -273,11 +289,14 @@ namespace UI
                     MessageBox.Show("家庭成员四关系未填");
                     return;
                 }
-                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyFourNameTxt.Text, IDcare = FamilyFourIDcareTxt.Text, ApplicantIDcare = MainIDcareTxt.Text, RelationshipBetween = FamilyFourBwteenCom.Text };
-                if (list.Where(p => p.IDcare == family.IDcare).ToList().Count != 0)
+                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyFourNameTxt.Text, IDcare = FamilyFourIDcareTxt.Text,  RelationshipBetween = FamilyFourBwteenCom.Text };
+                foreach (var item in list)
                 {
-                    MessageBox.Show("家庭成员四身份证号码重复");
-                    return;
+                    if (item.IDcare == family.IDcare)
+                    {
+                        MessageBox.Show("家庭成员一身份证号码重复");
+                        return;
+                    }
                 }
                 list.Add(family);
             }
@@ -299,11 +318,14 @@ namespace UI
                     MessageBox.Show("家庭成员五关系未填");
                     return;
                 }
-                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyFiveNameTxt.Text, IDcare = FamilyFiveIDcareTxt.Text, ApplicantIDcare = MainIDcareTxt.Text, RelationshipBetween = FamilyFiveBwteenCom.Text };
-                if (list.Where(p => p.IDcare == family.IDcare).ToList().Count != 0)
+                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyFiveNameTxt.Text, IDcare = FamilyFiveIDcareTxt.Text,  RelationshipBetween = FamilyFiveBwteenCom.Text };
+                foreach (var item in list)
                 {
-                    MessageBox.Show("家庭成员五身份证号码重复");
-                    return;
+                    if (item.IDcare == family.IDcare)
+                    {
+                        MessageBox.Show("家庭成员一身份证号码重复");
+                        return;
+                    }
                 }
                 list.Add(family);
             }
@@ -325,11 +347,14 @@ namespace UI
                     MessageBox.Show("家庭成员六关系未填");
                     return;
                 }
-                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilySixNameTxt.Text, IDcare = FamilySixIDcareTxt.Text, ApplicantIDcare = MainIDcareTxt.Text, RelationshipBetween = FamilySixBwteenCom.Text };
-                if (list.Where(p => p.IDcare == family.IDcare).ToList().Count != 0)
+                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilySixNameTxt.Text, IDcare = FamilySixIDcareTxt.Text,  RelationshipBetween = FamilySixBwteenCom.Text };
+                foreach (var item in list)
                 {
-                    MessageBox.Show("家庭成员六身份证号码重复");
-                    return;
+                    if (item.IDcare == family.IDcare)
+                    {
+                        MessageBox.Show("家庭成员一身份证号码重复");
+                        return;
+                    }
                 }
                 list.Add(family);
             }
@@ -351,11 +376,14 @@ namespace UI
                     MessageBox.Show("家庭成员七关系未填");
                     return;
                 }
-                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilySevenNameTxt.Text, IDcare = FamilySevenIDcareTxt.Text, ApplicantIDcare = MainIDcareTxt.Text, RelationshipBetween = FamilySevenBwteenCom.Text };
-                if (list.Where(p => p.IDcare == family.IDcare).ToList().Count != 0)
+                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilySevenNameTxt.Text, IDcare = FamilySevenIDcareTxt.Text, RelationshipBetween = FamilySevenBwteenCom.Text };
+                foreach (var item in list)
                 {
-                    MessageBox.Show("家庭成员七身份证号码重复");
-                    return;
+                    if (item.IDcare == family.IDcare)
+                    {
+                        MessageBox.Show("家庭成员一身份证号码重复");
+                        return;
+                    }
                 }
                 list.Add(family);
             }
@@ -377,18 +405,63 @@ namespace UI
                     MessageBox.Show("家庭成员八关系未填");
                     return;
                 }
-                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyEightNameTxt.Text, IDcare = FamilyEightIDcareTxt.Text, ApplicantIDcare = MainIDcareTxt.Text, RelationshipBetween = FamilyEightBwteenCom.Text };
-                if (list.Where(p => p.IDcare == family.IDcare).ToList().Count != 0)
+                FamilyPresonModel family = new FamilyPresonModel() { Name = FamilyEightNameTxt.Text, IDcare = FamilyEightIDcareTxt.Text, RelationshipBetween = FamilyEightBwteenCom.Text };
+                foreach (var item in list)
                 {
-                    MessageBox.Show("家庭成员八身份证号码重复");
-                    return;
+                    if (item.IDcare == family.IDcare)
+                    {
+                        MessageBox.Show("家庭成员一身份证号码重复");
+                        return;
+                    }
                 }
                 list.Add(family);
             }
 
             MyExcel myExcel = new MyExcel();
-            myExcel.CreateExcel(@"D:\" + MainWorkUnitsCom.Text + MainIDcareTxt.Text + ".xlsx", preson, list);
-            MessageBox.Show("成功");
+            try
+            {
+                myExcel.CreateExcel(PathTxt.Text+@"\" + MainWorkUnitsCom.Text + MainIDcareTxt.Text + ".xls", preson, list);
+                MessageBox.Show("成功","信息",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,"错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+          
+        }
+        /// <summary>
+        /// 窗口生成事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            //获取当前目录
+            PathTxt.Text= System.Environment.CurrentDirectory;
+        }
+        /// <summary>
+        /// 选择目录事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PathBtn_Click(object sender, EventArgs e)
+        {
+            //目录对话框
+            FolderBrowserDialog folder = new FolderBrowserDialog();
+            folder.ShowDialog();
+            PathTxt.Text = folder.SelectedPath;
+        }
+        /// <summary>
+        /// 浏览事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BrowseBtn_Click(object sender, EventArgs e)
+        {
+            //打开文件对话框
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = PathTxt.Text;
+            open.ShowDialog();
         }
     }
+
 }

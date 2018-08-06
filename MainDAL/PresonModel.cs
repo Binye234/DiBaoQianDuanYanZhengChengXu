@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace DAL
+namespace MainDAL
 {
     /// <summary>
-    /// 家庭成员模型
+    /// 申请人信息模型
     /// </summary>
-    public class FamilyPresonModel
+    public class PresonModel
     {
         /// <summary>
         /// 姓名
@@ -19,12 +19,12 @@ namespace DAL
         /// </summary>
         public string IDcare { set; get; }
         /// <summary>
-        /// 申请人号码
+        /// 至困原因
         /// </summary>
-        public string ApplicantIDcare { set; get; }
+        public string TrappedReason { set; get; }
         /// <summary>
-        /// 与申请人关系
+        /// 工作单位
         /// </summary>
-        public string RelationshipBetween { set; get; }
+        public string WorkUnits { set; get; }
     }
 }

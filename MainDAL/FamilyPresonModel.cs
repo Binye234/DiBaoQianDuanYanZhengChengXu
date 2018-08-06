@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace DAL
+namespace MainDAL
 {
     /// <summary>
     /// 家庭成员模型
@@ -21,7 +21,7 @@ namespace DAL
         /// <summary>
         /// 申请人号码
         /// </summary>
-        public string ApplicantIDcare { set; get; }
+      //  public string ApplicantIDcare { set; get; }
         /// <summary>
         /// 与申请人关系
         /// </summary>
