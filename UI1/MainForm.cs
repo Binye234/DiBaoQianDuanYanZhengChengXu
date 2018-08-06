@@ -412,6 +412,7 @@ namespace UI1
                     {
                         MessageBox.Show("家庭成员一身份证号码重复");
                         return;
+
                     }
                 }
                 list.Add(family);
